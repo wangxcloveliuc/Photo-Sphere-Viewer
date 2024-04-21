@@ -21,6 +21,7 @@ export type GalleryItem = {
      * Any option supported by the `setPanorama()` method
      */
     options?: PanoramaOptions;
+    data?: any;
 };
 
 export type GalleryPluginConfig = {

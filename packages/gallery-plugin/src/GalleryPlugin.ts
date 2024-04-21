@@ -1,6 +1,6 @@
 import type { Viewer } from '@photo-sphere-viewer/core';
 import { AbstractConfigurablePlugin, events, PSVError, utils } from '@photo-sphere-viewer/core';
-import { GalleryPluginEvents, HideGalleryEvent, ShowGalleryEvent } from './events';
+import { GalleryPluginEvents, HideGalleryEvent, ShowGalleryEvent, ChangeGalleryEvent } from './events';
 import { GalleryButton } from './GalleryButton';
 import { GalleryComponent } from './GalleryComponent';
 import { GalleryItem, GalleryPluginConfig, UpdatableGalleryPluginConfig } from './model';
@@ -177,7 +177,9 @@ export class GalleryPlugin extends AbstractConfigurablePlugin<
             this.viewer.setPanorama(item.panorama, {
                 caption: item.name,
                 ...item.options,
-            });
+            }).then(() => {
+                this.dispatchEvent(new ChangeGalleryEvent(item));
+            });;
         }
 
         this.currentId = id;

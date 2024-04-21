@@ -1,5 +1,6 @@
 import { TypedEvent } from '@photo-sphere-viewer/core';
 import type { GalleryPlugin } from './GalleryPlugin';
+import type { GalleryItem } from './model';
 
 /**
  * @event Triggered when the gallery shown
@@ -23,8 +24,18 @@ export class HideGalleryEvent extends TypedEvent<GalleryPlugin> {
 
     /** @internal */
     constructor() {
-        super(ShowGalleryEvent.type);
+        super(HideGalleryEvent.type);
     }
 }
 
-export type GalleryPluginEvents = ShowGalleryEvent | HideGalleryEvent;
+export class ChangeGalleryEvent extends TypedEvent<GalleryPlugin> {
+    static override readonly type = 'change-gallery';
+    override type: 'change-gallery';
+
+    /** @internal */
+    constructor(public readonly item: GalleryItem) {
+        super(ChangeGalleryEvent.type);
+    }
+}
+
+export type GalleryPluginEvents = ShowGalleryEvent | HideGalleryEvent | ChangeGalleryEvent;
