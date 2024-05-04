@@ -5,3 +5,5 @@ yarn-error.log
 !docs/.typedoc
 dist
 /public
+.DS_Store
+.VSCodeCounter
